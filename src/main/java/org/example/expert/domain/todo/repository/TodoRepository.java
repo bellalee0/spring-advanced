@@ -20,6 +20,4 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
             "LEFT JOIN FETCH t.user " +
             "WHERE t.id = :todoId")
     Optional<Todo> findByIdWithUser(@Param("todoId") Long todoId);
-
-    int countById(Long todoId);
 }
