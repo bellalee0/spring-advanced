@@ -98,7 +98,7 @@ class ManagerServiceTest {
     void todo가_정상적으로_등록된다() {
         // given
         AuthUser authUser = new AuthUser(1L, "a@a.com", UserRole.USER);
-        User user = User.fromAuthUser(authUser);  // 일정을 만든 유저
+        User user = userRepository.fromAuthUser(authUser);  // 일정을 만든 유저
 
         long todoId = 1L;
         Todo todo = new Todo("Test Title", "Test Contents", "Sunny", user);
