@@ -18,6 +18,17 @@ public class FilterConfig {
         FilterRegistrationBean<JwtFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new JwtFilter(jwtUtil, objectMapper));
         registrationBean.addUrlPatterns("/*");
+        registrationBean.setOrder(1);
+
+        return registrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean<ContentCachingFilter> contentCachingFilter() {
+        FilterRegistrationBean<ContentCachingFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new ContentCachingFilter());
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setOrder(2);
 
         return registrationBean;
     }
