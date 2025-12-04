@@ -1,7 +1,10 @@
-package org.example.expert.config;
+package org.example.expert.common.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.example.expert.common.filter.ContentCachingFilter;
+import org.example.expert.common.filter.JwtFilter;
+import org.example.expert.common.utils.JwtUtil;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
