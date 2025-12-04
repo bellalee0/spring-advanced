@@ -1,4 +1,4 @@
-package org.example.expert.config;
+package org.example.expert.common.filter;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;

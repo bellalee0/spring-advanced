@@ -1,14 +1,14 @@
 package org.example.expert.domain.auth.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.expert.config.JwtUtil;
-import org.example.expert.config.PasswordEncoder;
+import org.example.expert.common.utils.JwtUtil;
+import org.example.expert.common.utils.PasswordEncoder;
 import org.example.expert.domain.auth.dto.request.SigninRequest;
 import org.example.expert.domain.auth.dto.request.SignupRequest;
 import org.example.expert.domain.auth.dto.response.SigninResponse;
 import org.example.expert.domain.auth.dto.response.SignupResponse;
-import org.example.expert.domain.auth.exception.AuthException;
-import org.example.expert.domain.common.exception.InvalidRequestException;
+import org.example.expert.common.exception.AuthException;
+import org.example.expert.common.exception.InvalidRequestException;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.enums.UserRole;
 import org.example.expert.domain.user.repository.UserRepository;
@@ -39,11 +39,10 @@ public class AuthService {
                 encodedPassword,
                 userRole
         );
+
         User savedUser = userRepository.save(newUser);
 
-        String bearerToken = jwtUtil.createToken(savedUser.getId(), savedUser.getEmail(), userRole);
-
-        return new SignupResponse(bearerToken);
+        return new SignupResponse(savedUser.getId(), savedUser.getEmail(), savedUser.getUserRole());
     }
 
     @Transactional(readOnly = true)

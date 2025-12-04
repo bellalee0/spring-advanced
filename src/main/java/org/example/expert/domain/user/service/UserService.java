@@ -1,8 +1,8 @@
 package org.example.expert.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.expert.config.PasswordEncoder;
-import org.example.expert.domain.common.exception.InvalidRequestException;
+import org.example.expert.common.utils.PasswordEncoder;
+import org.example.expert.common.exception.InvalidRequestException;
 import org.example.expert.domain.user.dto.request.UserChangePasswordRequest;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.entity.User;
@@ -20,7 +20,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserResponse getUser(long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new InvalidRequestException("User not found"));
-        return new UserResponse(user.getId(), user.getEmail());
+        return user.toUserResponse();
     }
 
     @Transactional
