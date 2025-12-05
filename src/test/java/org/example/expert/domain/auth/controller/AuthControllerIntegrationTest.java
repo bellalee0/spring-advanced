@@ -2,14 +2,14 @@ package org.example.expert.domain.auth.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.example.expert.common.utils.JwtUtil;
-import org.example.expert.common.utils.PasswordEncoder;
 import org.example.expert.domain.user.entity.User;
-import org.example.expert.domain.user.enums.UserRole;
 import org.example.expert.domain.user.repository.UserRepository;
 import org.example.expert.fixtures.UserFixture;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AuthControllerIntegrationTest {
 
     @Autowired
@@ -33,6 +34,7 @@ class AuthControllerIntegrationTest {
 
 
     @Test
+    @Order(1)
     @DisplayName("POST /auth/signup 통합 테스트 - 회원가입 요청 성공")
     void signup() throws Exception {
 
@@ -57,6 +59,7 @@ class AuthControllerIntegrationTest {
     }
 
     @Test
+    @Order(2)
     @DisplayName("POST /auth/signin 통합 테스트 - 로그인 요청 성공")
     void signin() throws Exception {
 
