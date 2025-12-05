@@ -30,7 +30,7 @@ public class FilterConfig {
     public FilterRegistrationBean<ContentCachingFilter> contentCachingFilter() {
         FilterRegistrationBean<ContentCachingFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new ContentCachingFilter());
-        registrationBean.addUrlPatterns("/*");
+        registrationBean.addUrlPatterns("/admin/*");
         registrationBean.setOrder(2);
 
         return registrationBean;
