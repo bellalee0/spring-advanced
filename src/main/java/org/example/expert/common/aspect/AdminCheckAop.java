@@ -23,11 +23,11 @@ public class AdminCheckAop {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Pointcut("execution(* org.example.expert.domain.user.service.UserAdminService.*(..))")
+    @Pointcut("execution(* org.example.expert.domain.user.controller.UserAdminController.*(..))")
     public void changeUserRoleMethod() {
     }
 
-    @Pointcut("execution(* org.example.expert.domain.comment.service.CommentAdminService.*(..))")
+    @Pointcut("execution(* org.example.expert.domain.comment.controller.CommentAdminController.*(..))")
     public void deleteCommentMethod() {
     }
 
