@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
     }
 
     private static void logError(Exception ex, HttpServletRequest request) {
-        String userId = request.getAttribute("userId").toString();
+        String userId = request.getAttribute("userId") != null ? request.getAttribute("userId").toString() : "";
         String requestURI = request.getRequestURI();
 
         log.warn("커스텀 예외 발생: userId={}, URI={}, exception={} {}", userId, requestURI, ex.getClass().getSimpleName(), ex.getMessage());
