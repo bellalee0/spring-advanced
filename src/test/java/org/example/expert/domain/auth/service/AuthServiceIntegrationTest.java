@@ -88,8 +88,8 @@ class AuthServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("로그인 통합 테스트 - 존재하자 않는 계정으로 로그인")
-    void signin_failure_NotCreatedUser() {
+    @DisplayName("로그인 통합 테스트 - 존재하지 않는 계정으로 로그인")
+    void signin_failure_NotFoundUser() {
 
         // Given
         String email = UserFixture.DEFAULT_EMAIL;
