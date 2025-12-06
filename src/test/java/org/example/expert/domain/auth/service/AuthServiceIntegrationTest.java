@@ -30,7 +30,7 @@ class AuthServiceIntegrationTest {
     private UserRepository userRepository;
 
     @Test
-    @DisplayName("회원가입 통합 테스트 - 실제 DB에 저장 및 조회 검증")
+    @DisplayName("회원가입 통합 테스트 - 성공: 실제 DB에 저장 및 조회 검증")
     void signup_success() {
 
         // Given
@@ -51,7 +51,7 @@ class AuthServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("회원가입 통합 테스트 - 존재하는 이메일로 계정 생성")
+    @DisplayName("회원가입 통합 테스트 - 실패: 존재하는 이메일로 계정 생성")
     void signup_failure() {
 
         // Given
@@ -69,7 +69,7 @@ class AuthServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("로그인 통합 테스트 - 토큰 생성 검증")
+    @DisplayName("로그인 통합 테스트 - 성공: 토큰 생성 검증")
     void signin_success() {
 
         // Given
@@ -88,7 +88,7 @@ class AuthServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("로그인 통합 테스트 - 존재하지 않는 계정으로 로그인")
+    @DisplayName("로그인 통합 테스트 - 실패: 존재하지 않는 계정으로 로그인")
     void signin_failure_NotFoundUser() {
 
         // Given
@@ -102,7 +102,7 @@ class AuthServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("로그인 통합 테스트 - 잘못된 비밀번호로 로그인")
+    @DisplayName("로그인 통합 테스트 - 실패: 잘못된 비밀번호로 로그인")
     void signin_failure_WrongPassword() {
 
         // Given

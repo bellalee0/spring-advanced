@@ -23,14 +23,14 @@ class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
-    @DisplayName("AuthUser에서 User 객체 변환 테스트")
+    @DisplayName("AuthUser에서 User 객체 변환 테스트 - 성공")
     void fromAuthUser_success() {
 
         // Given
         User user = UserFixture.createTestUserUserRole();
         userRepository.save(user);
 
-        AuthUser authUser = new AuthUser(1L, UserFixture.DEFAULT_EMAIL, UserRole.USER);
+        AuthUser authUser = new AuthUser(user.getId(), UserFixture.DEFAULT_EMAIL, UserRole.USER);
 
         // When
         User loggedinUser = userRepository.fromAuthUser(authUser);

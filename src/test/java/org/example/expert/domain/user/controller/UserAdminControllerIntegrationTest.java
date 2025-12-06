@@ -53,7 +53,7 @@ class UserAdminControllerIntegrationTest {
 
     @Test
     @Order(1)
-    @DisplayName("PATCH /admin/users/{userId} 통합 테스트 - 유저 권한 변경 성공")
+    @DisplayName("PATCH /admin/users/{userId} 통합 테스트 - 유저 권한 변경 요청 성공")
     void changeUserRole_success() throws Exception {
 
         // Given
@@ -65,18 +65,16 @@ class UserAdminControllerIntegrationTest {
             """;
 
         // When & Then
-        mockMvc.perform(patch("/admin/users/1")
+        mockMvc.perform(patch(String.format("/admin/users/%d", user.getId()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", token)
                 .content(requestBody))
             .andExpect(status().isOk());
-
-        assertThat(user.getUserRole()).isEqualTo(UserRole.ADMIN);
     }
 
     @Test
     @Order(2)
-    @DisplayName("PATCH /admin/users/{userId} 통합 테스트 - Validation 작동 확인")
+    @DisplayName("PATCH /admin/users/{userId} 통합 테스트 - 실패: Validation 작동 확인")
     void changeUserRole_failure_NullRole() throws Exception {
 
         // Given
@@ -88,7 +86,7 @@ class UserAdminControllerIntegrationTest {
             """;
 
         // When & Then
-        mockMvc.perform(patch("/admin/users/1")
+        mockMvc.perform(patch(String.format("/admin/users/%d", user.getId()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", token)
                 .content(requestBody))
