@@ -1,9 +1,13 @@
 package org.example.expert.domain.user.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
+import org.example.expert.common.exception.InvalidRequestException;
 import org.example.expert.domain.user.dto.request.UserRoleChangeRequest;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.enums.UserRole;
@@ -28,7 +32,7 @@ class UserAdminServiceTest {
 
 
     @Test
-    @DisplayName("유저 권한 변경 테스트 - 실제 DB 변경 검증")
+    @DisplayName("유저 권한 변경 테스트 - 성공: 실제 DB 변경 검증")
     void changeUserRole_success() {
 
         // Given
@@ -46,5 +50,20 @@ class UserAdminServiceTest {
         // Then
         User changedUser = userRepository.findById(userId).orElseThrow();
         assertThat(changedUser.getUserRole()).isEqualTo(UserRole.ADMIN);
+    }
+
+    @Test
+    @DisplayName("유저 권한 변경 테스트 - 실패: 존재하지 않는 유저")
+    void changeUserRole_failure_NotFoundUserId() {
+
+        // Given
+        UserRoleChangeRequest userRoleChangeRequest = new UserRoleChangeRequest(UserRole.ADMIN.toString());
+
+        when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        // When & Then
+        InvalidRequestException exception = assertThrows(InvalidRequestException.class,
+            () -> userAdminService.changeUserRole(1L, userRoleChangeRequest));
+        assertEquals("User not found", exception.getMessage());
     }
 }
